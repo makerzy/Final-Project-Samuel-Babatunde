@@ -56,7 +56,7 @@ public class GraphQLController {
     }
 
     @QueryMapping
-    public List<Console> getConsolesByManufacturer(@Argument String manufacturer){
+    public List<Console> getConsoleByManufacturer(@Argument String manufacturer){
         return consoleRepository.findByManufacturer(manufacturer);
     }
 

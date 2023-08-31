@@ -58,6 +58,7 @@
 			<artifactId>springdoc-openapi-ui</artifactId>
 			<version>1.6.8</version>
 		</dependency>
+<!--		****************************** Comment out to test the graphql and reload Maven *************************-->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-oauth2</artifactId>
@@ -70,7 +71,7 @@
 			<artifactId>spring-cloud-starter-bootstrap</artifactId>
 			<version>3.1.5</version>
 		</dependency>
-
+<!--    **************************************************************************************************-->
 	</dependencies>
 
 	<build>
