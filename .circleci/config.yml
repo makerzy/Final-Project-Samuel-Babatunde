@@ -20,7 +20,7 @@ jobs:
         steps:
             # Check out the code as the first step.
             - checkout:
-                path: ~/Final-Project-AA-BS-SX/Final-Project-GameStore
+                path: ~/Final-Project-AA-BS-SX
             # Use mvn clean and package as the standard maven build phase
             - run:
                 name: Build
