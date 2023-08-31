@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ class GameRepositoryTest {
         game.setTitle("The Legend of Adventure");
         game.setEsrbRating("E10+");
         game.setDescription("Embark on an epic journey to save the mystical land from darkness.");
-        game.setPrice(49.99);
+        game.setPrice(BigDecimal.valueOf(49.99));
         game.setStudio("QuestWorks Studios");
         game.setQuantity(100);
 

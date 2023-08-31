@@ -18,7 +18,7 @@ public class Fee {
     @Id
     private String productType;
     @NotEmpty(message = "You must supply a value for fee.")
-    private double fee;
+    private BigDecimal fee;
 
     public String getProductType() {
         return productType;
@@ -28,11 +28,11 @@ public class Fee {
         this.productType = productType;
     }
 
-    public double getFee() {
+    public BigDecimal getFee() {
         return fee;
     }
 
-    public void setFee(double fee) {
+    public void setFee(BigDecimal fee) {
         this.fee = fee;
     }
 

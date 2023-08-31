@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +28,7 @@ public class TShirtRepositoryTest {
         tShirt.setSize("M");
         tShirt.setColor("Red");
         tShirt.setDescription("TShirt description");
-        tShirt.setPrice(19.99);
+        tShirt.setPrice(BigDecimal.valueOf(19.99));
         tShirt.setQuantity(20);
         tShirtRepository.save(tShirt);
     }
@@ -57,7 +58,7 @@ public class TShirtRepositoryTest {
         tShirt1.setSize("L");
         tShirt1.setColor("Green");
         tShirt1.setDescription("Description for a green T-shirt");
-        tShirt1.setPrice(24.99);
+        tShirt1.setPrice(BigDecimal.valueOf(24.99));
         tShirt1 = tShirtRepository.save(tShirt1);
         List<TShirt> tShirts = tShirtRepository.findAll();
         assertTrue(tShirts.contains(tShirt1));
@@ -67,10 +68,10 @@ public class TShirtRepositoryTest {
 
     @Test
     public void shouldUpdateTShirt(){
-        tShirt.setPrice(14.99);
+        tShirt.setPrice(BigDecimal.valueOf(14.99));
         tShirtRepository.save(tShirt);
         Optional<TShirt> tShirt1 = tShirtRepository.findById(tShirt.getTshirtId());
-        assertEquals(tShirt1.get().getPrice(), 14.99);
+        assertEquals(tShirt1.get().getPrice(), BigDecimal.valueOf(14.99));
         assertEquals(tShirt1.get(), tShirt);
     }
 

@@ -18,7 +18,7 @@ public class Tax {
     @Id
     private String state;
     @NotEmpty(message = "You must supply a value for rate.")
-    private double rate;
+    private BigDecimal rate;
 
     public String getState() {
         return state;
@@ -28,11 +28,11 @@ public class Tax {
         this.state = state;
     }
 
-    public double getRate() {
+    public BigDecimal getRate() {
         return rate;
     }
 
-    public void setRate(double rate) {
+    public void setRate(BigDecimal rate) {
         this.rate = rate;
     }
 

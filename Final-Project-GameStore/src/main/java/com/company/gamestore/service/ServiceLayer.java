@@ -8,13 +8,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ServiceLayer {
 
-    private final double EXTRA_FEE= 15.49;
+    private final BigDecimal EXTRA_FEE= BigDecimal.valueOf(15.49);
     private InvoiceRepository invoiceRepository;
     private TaxRepository taxRepository;
     private FeeRepository feeRepository;
@@ -39,8 +41,8 @@ public class ServiceLayer {
         this.tShirtRepository = tShirtRepository;
     }
 
-    private double round(double value){
-        return (double)Math.round(value *100)/100;
+    private BigDecimal round(BigDecimal value){
+        return value.setScale(2, RoundingMode.CEILING);
     }
 
     @Transactional
@@ -59,7 +61,7 @@ public class ServiceLayer {
             invoice.setItemType(ivModel.getItemType());
             invoice.setItemId(ivModel.getItemId());
             invoice.setQuantity(ivModel.getQuantity());
-            double unitPrice = 0.0;
+            BigDecimal unitPrice = BigDecimal.valueOf(0.0);
             switch (ivModel.getItemType().toLowerCase()) {
                 case "game":
                     Optional<Game> game = gameRepository.findById(ivModel.getItemId());
@@ -101,9 +103,9 @@ public class ServiceLayer {
                     break;
             }
             invoice.setUnitPrice(round(unitPrice));
-            double subtotal = round(unitPrice * ivModel.getQuantity());
+            BigDecimal subtotal = round(unitPrice.multiply(BigDecimal.valueOf(ivModel.getQuantity())));
             invoice.setSubtotal(subtotal);
-            double rate = 0.0;
+            BigDecimal rate =  BigDecimal.valueOf(0.0);
             List<Tax> taxes = taxRepository.findByState(ivModel.getState());
             if (taxes.size() > 0) {
                 rate = taxes.get(0).getRate();
@@ -114,20 +116,20 @@ public class ServiceLayer {
                 throw new IllegalArgumentException("Cannot process order for unknown state code");
             }
 
-            double taxValue = round(subtotal * rate);
+            BigDecimal taxValue = round(subtotal.multiply(rate));
             invoice.setTax(taxValue);
             String itemType = ivModel.getItemType().equalsIgnoreCase("tshirt") ? "T-Shirt" : ivModel.getItemType();
             List<Fee> fees = feeRepository.findByProductType(itemType);
-            double processingFee = 0.0;
+            BigDecimal processingFee = BigDecimal.valueOf(0.0);
 
             if (ivModel.getQuantity() > 10) {
-                processingFee = fees.get(0).getFee() + EXTRA_FEE;
+                processingFee = fees.get(0).getFee().add( EXTRA_FEE);
             }else{
                 processingFee = fees.get(0).getFee();
             }
             invoice.setProcessingFee(processingFee);
 
-            double total = subtotal + taxValue + processingFee;
+            BigDecimal total = subtotal.add( taxValue).add( processingFee);
             invoice.setTotal(total);
 
             return invoiceRepository.save(invoice);

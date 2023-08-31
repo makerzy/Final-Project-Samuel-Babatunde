@@ -5,6 +5,8 @@ import com.company.gamestore.model.Game;
 import com.company.gamestore.model.TShirt;
 import com.company.gamestore.repository.ConsoleRepository;
 import com.company.gamestore.repository.TShirtRepository;
+import com.company.gamestore.service.ServiceLayer;
+import com.company.gamestore.service.ServiceLayerTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -34,6 +37,9 @@ class ConsoleControllerTest {
     private final ObjectMapper mapper = new ObjectMapper();
     @MockBean
     private ConsoleRepository consoleRepository;
+
+    @MockBean
+    private ServiceLayer serviceLayer;
     private Console console;
 
     @BeforeEach
@@ -43,7 +49,7 @@ class ConsoleControllerTest {
         console.setManufacturer("Sony");
         console.setMemoryAmount("825GB SSD");
         console.setProcessor("AMD");
-        console.setPrice(49.99);
+        console.setPrice(BigDecimal.valueOf(49.99));
         console.setQuantity(100);
 
     }

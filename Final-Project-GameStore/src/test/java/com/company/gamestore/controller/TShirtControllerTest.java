@@ -3,6 +3,7 @@ package com.company.gamestore.controller;
 
 import com.company.gamestore.model.TShirt;
 import com.company.gamestore.repository.TShirtRepository;
+import com.company.gamestore.service.ServiceLayer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -33,6 +35,8 @@ public class TShirtControllerTest {
     private final ObjectMapper mapper = new ObjectMapper();
     @MockBean
     private TShirtRepository tShirtRepository;
+    @MockBean
+    private ServiceLayer serviceLayer;
     private TShirt tShirt;
 
     @BeforeEach
@@ -42,7 +46,7 @@ public class TShirtControllerTest {
         tShirt.setSize("M");
         tShirt.setColor("Red");
         tShirt.setDescription("TShirt description");
-        tShirt.setPrice(19.99);
+        tShirt.setPrice(BigDecimal.valueOf(19.99));
         tShirt.setQuantity(20);
     }
 

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -24,7 +25,7 @@ public class TShirt implements Serializable {
     @NotEmpty(message = "You must supply a value for description.")
     private String description;
     @NotEmpty(message = "You must supply a value for price.")
-    private  double price;
+    private BigDecimal price;
     @NotEmpty(message = "You must supply a value for quantity.")
     private int quantity;
 
@@ -60,11 +61,11 @@ public class TShirt implements Serializable {
         this.description = description;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -76,20 +77,18 @@ public class TShirt implements Serializable {
         this.quantity = quantity;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TShirt tShirt = (TShirt) o;
-        return tshirtId == tShirt.tshirtId && Double.compare(tShirt.price, price) == 0 && quantity == tShirt.quantity && Objects.equals(size, tShirt.size) && Objects.equals(color, tShirt.color) && Objects.equals(description, tShirt.description);
+        return tshirtId == tShirt.tshirtId && quantity == tShirt.quantity && Objects.equals(size, tShirt.size) && Objects.equals(color, tShirt.color) && Objects.equals(description, tShirt.description) && Objects.equals(price, tShirt.price);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(tshirtId, size, color, description, price, quantity);
     }
-
 
     @Override
     public String toString() {

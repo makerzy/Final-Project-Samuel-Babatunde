@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,7 @@ class ConsoleRepositoryTest {
         console.setManufacturer("Sony");
         console.setMemoryAmount("825GB SSD");
         console.setProcessor("Custom AMD Zen 2");
-        console.setPrice(499.99);
+        console.setPrice(BigDecimal.valueOf(499.99));
         console.setQuantity(100);
 
     }

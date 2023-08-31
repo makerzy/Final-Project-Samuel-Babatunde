@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 
@@ -25,7 +26,7 @@ public class Game implements Serializable {
     @NotEmpty(message = "You must supply a value for description.")
     private String description;
     @NotEmpty(message = "You must supply a value for price.")
-    private double price;
+    private BigDecimal price;
     @NotEmpty(message = "You must supply a value for studio.")
     private String studio;
     @NotEmpty(message = "You must supply a value for quantity.")
@@ -63,11 +64,11 @@ public class Game implements Serializable {
         this.description = description;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -92,7 +93,7 @@ public class Game implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Game game = (Game) o;
-        return gameId == game.gameId && Double.compare(price, game.price) == 0 && quantity == game.quantity && Objects.equals(title, game.title) && Objects.equals(esrbRating, game.esrbRating) && Objects.equals(description, game.description) && Objects.equals(studio, game.studio);
+        return gameId == game.gameId && quantity == game.quantity && Objects.equals(title, game.title) && Objects.equals(esrbRating, game.esrbRating) && Objects.equals(description, game.description) && Objects.equals(price, game.price) && Objects.equals(studio, game.studio);
     }
 
     @Override

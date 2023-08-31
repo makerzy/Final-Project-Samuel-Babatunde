@@ -4,6 +4,7 @@ import com.company.gamestore.model.Game;
 import com.company.gamestore.model.TShirt;
 import com.company.gamestore.repository.GameRepository;
 import com.company.gamestore.repository.TShirtRepository;
+import com.company.gamestore.service.ServiceLayer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -33,6 +35,8 @@ class GameControllerTest {
     private final ObjectMapper mapper = new ObjectMapper();
     @MockBean
     private GameRepository gameRepository;
+    @MockBean
+    private ServiceLayer serviceLayer;
     private Game game;
 
     @BeforeEach
@@ -41,7 +45,7 @@ class GameControllerTest {
         game.setTitle("Title1");
         game.setEsrbRating("E10");
         game.setDescription("GameNew");
-        game.setPrice(49.99);
+        game.setPrice(BigDecimal.valueOf(49.99));
         game.setStudio("Studioss");
         game.setQuantity(100);
 

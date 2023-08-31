@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -26,7 +27,7 @@ public class Console implements Serializable {
     private String memoryAmount;
     private String processor;
     @NotEmpty(message = "You must supply a value for price.")
-    private double price;
+    private BigDecimal price;
     @NotEmpty(message = "You must supply a value for quantity.")
     private int quantity;
 
@@ -70,11 +71,11 @@ public class Console implements Serializable {
         this.processor = processor;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -91,7 +92,7 @@ public class Console implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Console console = (Console) o;
-        return consoleId == console.consoleId && Double.compare(price, console.price) == 0 && quantity == console.quantity && Objects.equals(model, console.model) && Objects.equals(manufacturer, console.manufacturer) && Objects.equals(memoryAmount, console.memoryAmount) && Objects.equals(processor, console.processor);
+        return consoleId == console.consoleId && quantity == console.quantity && Objects.equals(model, console.model) && Objects.equals(manufacturer, console.manufacturer) && Objects.equals(memoryAmount, console.memoryAmount) && Objects.equals(processor, console.processor) && Objects.equals(price, console.price);
     }
 
     @Override

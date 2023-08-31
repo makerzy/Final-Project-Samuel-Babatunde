@@ -18,6 +18,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.math.BigDecimal;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -82,11 +84,11 @@ public class InvoiceControllerTest {
         invoice.setItemType("Console");
         invoice.setItemId(1);
         invoice.setQuantity(1);
-        invoice.setUnitPrice(499.99);
-        invoice.setSubtotal(999.98);
-        invoice.setTax(69.99);
-        invoice.setProcessingFee(14.99);
-        invoice.setTotal(1084.97);
+        invoice.setUnitPrice(BigDecimal.valueOf(499.99));
+        invoice.setSubtotal(BigDecimal.valueOf(999.98));
+        invoice.setTax(BigDecimal.valueOf(69.99));
+        invoice.setProcessingFee(BigDecimal.valueOf(14.99));
+        invoice.setTotal(BigDecimal.valueOf(1084.97));
 
     }
 

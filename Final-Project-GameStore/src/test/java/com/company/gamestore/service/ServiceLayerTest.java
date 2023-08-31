@@ -8,13 +8,15 @@ import com.company.gamestore.viewmodel.InvoiceViewModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import static org.mockito.Mockito.*;
 
 public class ServiceLayerTest {
@@ -48,7 +50,7 @@ public class ServiceLayerTest {
         game.setTitle("The Legend of Adventure");
         game.setEsrbRating("E10+");
         game.setDescription("Embark on an epic journey to save the mystical land from darkness.");
-        game.setPrice(49.99);
+        game.setPrice(BigDecimal.valueOf(49.99));
         game.setStudio("QuestWorks Studios");
         game.setQuantity(100);
 
@@ -68,7 +70,7 @@ public class ServiceLayerTest {
         console.setManufacturer("Sony");
         console.setMemoryAmount("825GB SSD");
         console.setProcessor("Custom AMD Zen 2");
-        console.setPrice(499.99);
+        console.setPrice(BigDecimal.valueOf(499.99));
         console.setQuantity(100);
 
         List<Console> consoles = new ArrayList<>();
@@ -86,7 +88,7 @@ public class ServiceLayerTest {
         tShirt.setSize("M");
         tShirt.setColor("Red");
         tShirt.setDescription("TShirt description");
-        tShirt.setPrice(19.99);
+        tShirt.setPrice(BigDecimal.valueOf(19.99));
         tShirt.setQuantity(20);
 
 
@@ -103,13 +105,13 @@ public class ServiceLayerTest {
 
         Fee fee = new Fee();
         fee.setProductType("Console");
-        fee.setFee(14.99);
+        fee.setFee(BigDecimal.valueOf(14.99));
         Fee fee1 = new Fee();
-        fee1.setFee(1.98);
+        fee1.setFee(BigDecimal.valueOf(1.98));
         fee1.setProductType("T-Shirt");
         Fee fee2 = new Fee();
         fee2.setProductType("Game");
-        fee2.setFee(1.49);
+        fee2.setFee(BigDecimal.valueOf(1.49));
         List<Fee> fees = new ArrayList<>();
         fees.add(fee);
         fees.add(fee1);
@@ -128,13 +130,13 @@ public class ServiceLayerTest {
         taxRepository = mock(TaxRepository.class);
         Tax tax = new Tax();
         tax.setState("CA");
-        tax.setRate(0.06);
+        tax.setRate(BigDecimal.valueOf(0.06));
         Tax tax1 = new Tax();
         tax1.setState("FL");
-        tax1.setRate(0.06);
+        tax1.setRate(BigDecimal.valueOf(0.06));
         Tax tax2 = new Tax();
         tax.setState("GA");
-        tax.setRate(0.07);
+        tax.setRate(BigDecimal.valueOf(0.07));
 
         List<Tax> taxes = new ArrayList<>();
         taxes.add(tax);
@@ -170,15 +172,15 @@ public class ServiceLayerTest {
 
         Optional<Console> console = consoleRepository.findById(1);
 
-        double unitPrice = console.get().getPrice();
+        BigDecimal unitPrice = console.get().getPrice();
         invoice.setUnitPrice(unitPrice);
-        double subtotal = round(2 * unitPrice);
+        BigDecimal subtotal = round( unitPrice.multiply(BigDecimal.valueOf(2)));
         invoice.setSubtotal(subtotal);
-        double taxVal = round(subtotal * tax.getRate());
+        BigDecimal taxVal = round(subtotal.multiply( tax.getRate()));
         invoice.setTax(taxVal);
-        double processingFee = fee.getFee();
+        BigDecimal processingFee = fee.getFee();
         invoice.setProcessingFee(processingFee);
-        double total = round(subtotal + processingFee + taxVal);
+        BigDecimal total = round(subtotal.add(processingFee).add( taxVal));
         invoice.setTotal(total);
 
         viewModel = new InvoiceViewModel();
@@ -198,8 +200,8 @@ public class ServiceLayerTest {
         doReturn(Optional.of(invoice)).when(invoiceRepository).findById(1);
     }
 
-    private double round(double value){
-        return (double)Math.round(value *100)/100;
+    private BigDecimal round(BigDecimal value){
+        return value.setScale(2, RoundingMode.CEILING);
     }
 
 
@@ -213,7 +215,7 @@ public class ServiceLayerTest {
     @Test
     public void shouldThrowInsufficientStockException() {
         viewModel.setQuantity(110);
-        when(serviceLayer.saveInvoice(viewModel)).thenThrow(new InsufficientStockException("Order quantity must be less than or equal available stock"));
+        when(serviceLayer.saveInvoice(viewModel)).thenThrow(new IllegalArgumentException("Order quantity must be less than or equal available stock"));
 
     }
 

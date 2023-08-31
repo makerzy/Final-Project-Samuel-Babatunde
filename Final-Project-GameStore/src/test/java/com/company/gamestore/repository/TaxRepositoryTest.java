@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +23,7 @@ public class TaxRepositoryTest {
 
         Tax tax = new Tax();
         tax.setState("FL");
-        tax.setRate(0.06);
+        tax.setRate(BigDecimal.valueOf(0.06));
 
         List<Tax> taxR = taxRepository.findByState(tax.getState());
         assertTrue(taxR.contains(tax));
