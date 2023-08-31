@@ -6,13 +6,13 @@ import com.company.gamestore.model.*;
 import com.company.gamestore.repository.*;
 import com.company.gamestore.viewmodel.InvoiceViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 public class ServiceLayer {
 
     private final double EXTRA_FEE= 15.49;
@@ -66,7 +66,7 @@ public class ServiceLayer {
                     Optional<Game> game = gameRepository.findById(ivModel.getItemId());
                     if (game.isPresent()) {
                         if (game.get().getQuantity() < ivModel.getQuantity()) {
-                            throw new InsufficientStockException("Order quantity must be less than or equal available stock");
+                            throw new InvalidQuantityException("Order quantity must be less than or equal available stock");
                         }
                         unitPrice = game.get().getPrice();
                     }
@@ -79,7 +79,7 @@ public class ServiceLayer {
                     Optional<TShirt> tShirt = tShirtRepository.findById(ivModel.getItemId());
                     if (tShirt.isPresent()) {
                         if (tShirt.get().getQuantity() < ivModel.getQuantity()) {
-                            throw new InsufficientStockException("Order quantity must be less than or equal available stock");
+                            throw new InvalidQuantityException("Order quantity must be less than or equal available stock");
                         }
                         unitPrice = tShirt.get().getPrice();
                     }else{
@@ -92,7 +92,7 @@ public class ServiceLayer {
 
                     if (console.isPresent()) {
                         if (console.get().getQuantity() < ivModel.getQuantity()) {
-                            throw new InsufficientStockException("Order quantity must be less than or equal available stock");
+                            throw new InvalidQuantityException("Order quantity must be less than or equal available stock");
                         }
                         unitPrice = console.get().getPrice();
 
