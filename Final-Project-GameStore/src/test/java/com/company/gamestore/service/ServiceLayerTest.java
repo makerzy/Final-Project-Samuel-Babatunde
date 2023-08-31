@@ -1,6 +1,5 @@
 package com.company.gamestore.service;
 
-import com.company.gamestore.exception.InsufficientStockException;
 import com.company.gamestore.exception.InvalidQuantityException;
 import com.company.gamestore.exception.UnknownStateCodeException;
 import com.company.gamestore.model.*;
@@ -9,7 +8,6 @@ import com.company.gamestore.viewmodel.InvoiceViewModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
