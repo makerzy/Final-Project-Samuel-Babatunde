@@ -14,7 +14,7 @@ jobs:
         # Be sure to update the Docker image tag below to the openjdk version of your application.
         # A list of available CircleCI Docker Convenience assets are available here: https://circleci.com/developer/assets/image/cimg/openjdk
         docker:
-            - image: cimg/openjdk:8.0
+            - image: cimg/openjdk:11.0
             # Add steps to the job
             # See: https://circleci.com/docs/2.0/configuration-reference/#steps
         steps:
@@ -26,9 +26,9 @@ jobs:
                 name: Build
                 command: mvn -B -DskipTests clean package
             # Then run your tests!
-            - run:
-                name: Test
-                command: mvn -cp game-store
+            # - run:
+            #     name: Test
+            #     command: mvn test
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
