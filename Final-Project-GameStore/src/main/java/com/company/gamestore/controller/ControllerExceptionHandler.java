@@ -1,9 +1,5 @@
 package com.company.gamestore.controller;
 
-import com.company.gamestore.exception.IdMismatchException;
-import com.company.gamestore.exception.InvalidQuantityException;
-import com.company.gamestore.exception.NotFoundException;
-import com.company.gamestore.exception.UnknownStateCodeException;
 import com.company.gamestore.model.CustomErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.webjars.NotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,7 +18,6 @@ import java.util.List;
 @RestControllerAdvice
 public class ControllerExceptionHandler {
 
-    // TODO - should be good, but will check with TA on Wednesday
     @ExceptionHandler(value = {MethodArgumentNotValidException.class})
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     public ResponseEntity<List<CustomErrorResponse>> recordValidationError(MethodArgumentNotValidException e) {
@@ -44,36 +40,18 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<>(errorResponseList, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
-    @ExceptionHandler(InvalidQuantityException.class)
-    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    public ResponseEntity<CustomErrorResponse> handleInvalidQuantityException(InvalidQuantityException e) {
-        CustomErrorResponse errorRes = new CustomErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY.toString(), e.getMessage());
-        errorRes.setStatus((HttpStatus.UNPROCESSABLE_ENTITY.value()));
+    @ExceptionHandler(value = NotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<CustomErrorResponse> notFoundException(NotFoundException e) {
+        CustomErrorResponse errorRes = new CustomErrorResponse(HttpStatus.NOT_FOUND.toString(), e.getMessage());
+        errorRes.setStatus((HttpStatus.NOT_FOUND.value()));
         errorRes.setTimestamp(LocalDateTime.now());
-        return new ResponseEntity<>(errorRes, HttpStatus.UNPROCESSABLE_ENTITY);
+        return new ResponseEntity<>(errorRes, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(UnknownStateCodeException.class)
+    @ExceptionHandler(value = IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    public ResponseEntity<CustomErrorResponse> handleUnknownStateCodeException(UnknownStateCodeException e) {
-        CustomErrorResponse errorRes = new CustomErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY.toString(), e.getMessage());
-        errorRes.setStatus((HttpStatus.UNPROCESSABLE_ENTITY.value()));
-        errorRes.setTimestamp(LocalDateTime.now());
-        return new ResponseEntity<>(errorRes, HttpStatus.UNPROCESSABLE_ENTITY);
-    }
-
-    @ExceptionHandler(IdMismatchException.class)
-    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    public ResponseEntity<CustomErrorResponse> handleIdMismatchException(IdMismatchException e) {
-        CustomErrorResponse errorRes = new CustomErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY.toString(), e.getMessage());
-        errorRes.setStatus((HttpStatus.UNPROCESSABLE_ENTITY.value()));
-        errorRes.setTimestamp(LocalDateTime.now());
-        return new ResponseEntity<>(errorRes, HttpStatus.UNPROCESSABLE_ENTITY);
-    }
-
-    @ExceptionHandler(NotFoundException.class)
-    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    public ResponseEntity<CustomErrorResponse> handleNotFoundException(NotFoundException e) {
+    public ResponseEntity<CustomErrorResponse> illegalArgumentException(IllegalArgumentException e) {
         CustomErrorResponse errorRes = new CustomErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY.toString(), e.getMessage());
         errorRes.setStatus((HttpStatus.UNPROCESSABLE_ENTITY.value()));
         errorRes.setTimestamp(LocalDateTime.now());
