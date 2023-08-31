@@ -134,7 +134,6 @@ public class ServiceLayer {
             return invoiceRepository.save(invoice);
     }
 
-
     @Transactional
     public void handleUpdate(String category, int id, Object object) {
             switch (category.toLowerCase()) {
@@ -178,11 +177,6 @@ public class ServiceLayer {
                         throw new NotFoundException("Cannot update non existing Invoice Object");
                     invoiceRepository.save(newInvoice);
                     break;
-
             }
-
     }
-
-
-
 }

@@ -1,4 +1,4 @@
-package com.company.gamestore.exceptionHandler;
+package com.company.gamestore.controller;
 
 import com.company.gamestore.exception.IdMismatchException;
 import com.company.gamestore.exception.InvalidQuantityException;
@@ -41,8 +41,7 @@ public class ControllerExceptionHandler {
         }
 
         // Create and return the ResponseEntity
-        ResponseEntity<List<CustomErrorResponse>> responseEntity = new ResponseEntity<>(errorResponseList, HttpStatus.UNPROCESSABLE_ENTITY);
-        return responseEntity;
+        return new ResponseEntity<>(errorResponseList, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @ExceptionHandler(InvalidQuantityException.class)
@@ -51,8 +50,7 @@ public class ControllerExceptionHandler {
         CustomErrorResponse errorRes = new CustomErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY.toString(), e.getMessage());
         errorRes.setStatus((HttpStatus.UNPROCESSABLE_ENTITY.value()));
         errorRes.setTimestamp(LocalDateTime.now());
-        ResponseEntity<CustomErrorResponse> responseEntity = new ResponseEntity<>(errorRes, HttpStatus.UNPROCESSABLE_ENTITY);
-        return responseEntity;
+        return new ResponseEntity<>(errorRes, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @ExceptionHandler(UnknownStateCodeException.class)
@@ -61,8 +59,7 @@ public class ControllerExceptionHandler {
         CustomErrorResponse errorRes = new CustomErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY.toString(), e.getMessage());
         errorRes.setStatus((HttpStatus.UNPROCESSABLE_ENTITY.value()));
         errorRes.setTimestamp(LocalDateTime.now());
-        ResponseEntity<CustomErrorResponse> responseEntity = new ResponseEntity<>(errorRes, HttpStatus.UNPROCESSABLE_ENTITY);
-        return responseEntity;
+        return new ResponseEntity<>(errorRes, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @ExceptionHandler(IdMismatchException.class)
@@ -71,8 +68,7 @@ public class ControllerExceptionHandler {
         CustomErrorResponse errorRes = new CustomErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY.toString(), e.getMessage());
         errorRes.setStatus((HttpStatus.UNPROCESSABLE_ENTITY.value()));
         errorRes.setTimestamp(LocalDateTime.now());
-        ResponseEntity<CustomErrorResponse> responseEntity = new ResponseEntity<>(errorRes, HttpStatus.UNPROCESSABLE_ENTITY);
-        return responseEntity;
+        return new ResponseEntity<>(errorRes, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @ExceptionHandler(NotFoundException.class)
@@ -81,7 +77,6 @@ public class ControllerExceptionHandler {
         CustomErrorResponse errorRes = new CustomErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY.toString(), e.getMessage());
         errorRes.setStatus((HttpStatus.UNPROCESSABLE_ENTITY.value()));
         errorRes.setTimestamp(LocalDateTime.now());
-        ResponseEntity<CustomErrorResponse> responseEntity = new ResponseEntity<>(errorRes, HttpStatus.UNPROCESSABLE_ENTITY);
-        return responseEntity;
+        return new ResponseEntity<>(errorRes, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 }
