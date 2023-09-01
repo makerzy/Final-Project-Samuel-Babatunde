@@ -14,7 +14,6 @@ import java.util.Optional;
 @SpringBootTest
 public class TaxRepositoryTest {
 
-
     @Autowired
     TaxRepository taxRepository;
 
