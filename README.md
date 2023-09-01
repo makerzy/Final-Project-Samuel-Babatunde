@@ -8,12 +8,12 @@ Users will be able to:
 - be able to search for consoles by manufacturer.
 - be able to create, update, delete, and read T-SHIRT information.
 - be able to search for t-shirts by color and size.
-- be able to purchase a specified quantity of products (games, consoles, T-shirts) and an invoice will be created that includes any taxes and processing fees.
+- be able to purchase a specified quantity of products (games, consoles, T-shirts), and an invoice will be created that includes any taxes and processing fees.
 
 
 
 ## **REST API**
-The rest APIs allow users to perform CRUD operations and search by particular category
+The REST APIs allow users to perform CRUD operations and search by a particular category.
 
 ## **GraphQL**
 The project also supports GraphQL queries to retrieve the following information:
@@ -40,4 +40,4 @@ The project also supports GraphQL queries to retrieve the following information:
 ![image](https://github.com/sxw022020/Final-Project-AA-BS-SX/assets/60712169/0e4c2797-40be-4be7-838f-6957d5055ec4)
 
 ## VIDEO DEMO
-https://nflxvirtjavap-koa5446.slack.com/archives/C05NUTU67EW/p1693533118683649
+[https://nflxvirtjavap-koa5446.slack.com/archives/C05NUTU67EW/p1693533118683649](https://drive.google.com/file/d/1atZ8fNIxYNVuyNV06wgiQUxlb96snEVY/view?usp=drive_link)
