@@ -233,15 +233,4 @@ public class ServiceLayerTest {
         when(serviceLayer.saveInvoice(viewModel)).thenThrow(new InvalidQuantityException("Order quantity must be greater than or equal to 1"));
 
     }
-
-//    @Test
-//    public void shouldThrowIfAttemptToUpdateNullObject() {
-//
-//    }
-//
-//
-//    @Test
-//    public void shouldThrowIfAttemptToUpdateNotMatchingIDs() {
-//
-//    }
 }
