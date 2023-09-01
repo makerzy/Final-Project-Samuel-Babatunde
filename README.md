@@ -31,3 +31,5 @@ The project also supports GraphQL queries to retrieve the following information:
 ## **DEPLOYMENT**
 
 
+## VIDEO DEMO
+https://nflxvirtjavap-koa5446.slack.com/archives/C05NUTU67EW/p1693533118683649
