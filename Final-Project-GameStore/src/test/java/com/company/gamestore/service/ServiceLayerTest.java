@@ -62,6 +62,7 @@ public class ServiceLayerTest {
         doReturn(games).when(gameRepository).findAll();
     }
 
+
     public void setUpConsoleRepo() {
         consoleRepository = mock(ConsoleRepository.class);
         Console console = new Console();
@@ -80,6 +81,7 @@ public class ServiceLayerTest {
         doReturn(Optional.of(console)).when(consoleRepository).findById(1);
         doReturn(consoles).when(consoleRepository).findAll();
     }
+
 
     public void setUpTShirtRepo() {
         tShirtRepository = mock(TShirtRepository.class);
