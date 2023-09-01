@@ -28,15 +28,15 @@ The project also supports GraphQL queries to retrieve the following information:
 - Get a Console by Manufacturer
 
 ## **CICD**
-  - Overview:
+- Overview <br />
 <img width="1638" alt="Screenshot 2023-08-31 at 6 28 52 PM" src="https://github.com/sxw022020/Final-Project-AA-BS-SX/assets/60712169/0ad34079-17fd-40b7-a410-506eea2d17d6">
-  - BUILD SUCCESS
+- BUILD SUCCESS <br />
 <img width="1624" alt="Screenshot 2023-08-31 at 6 29 02 PM" src="https://github.com/sxw022020/Final-Project-AA-BS-SX/assets/60712169/9892c95d-cbe9-4624-8364-0f705c67eece">
-  - TEST SUCCESS
+- TEST SUCCESS <br />
 <img width="1618" alt="Screenshot 2023-08-31 at 6 29 13 PM" src="https://github.com/sxw022020/Final-Project-AA-BS-SX/assets/60712169/fa412895-671b-477a-8a5c-c48eca2598b8">
 
 ## **DEPLOYMENT**
-  - Result from Elastic Beanstalk 
+- Result from Elastic Beanstalk <br />
 ![image](https://github.com/sxw022020/Final-Project-AA-BS-SX/assets/60712169/0e4c2797-40be-4be7-838f-6957d5055ec4)
 
 ## VIDEO DEMO
